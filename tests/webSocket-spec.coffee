@@ -16,10 +16,12 @@ describe 'webSocket', ->
   describe 'initialization', ->
 
     it 'should construct URL that matches Really URL scheme when domain is passed', ->
+      console.log 'hi'
       ws = new WebSocketTransport('wss://a6bcc.api.really.io', 'ibj88w5aye', options)
       expect(ws.url).toEqual "wss://a6bcc.api.really.io/v#{protocol.clientVersion}/socket"
 
     it 'should throw error if initialized without passing domain and access token', ->
+      console.log 'hi'
       expect ->
         ws = new WebSocketTransport(null, null, options)
       .toThrow new ReallyError('Can\'t initialize connection without passing domain and access token')
@@ -43,6 +45,7 @@ describe 'webSocket', ->
   describe 'connect', ->
 
     it 'should initialize @socket only one time (singleton)', ->
+      console.log 'hi'
       ws = new WebSocketTransport('wss://a6bcc.api.really.io','ibj88w5aye', options)
       ws.connect()
       socket1 = ws.socket
@@ -64,6 +67,7 @@ describe 'webSocket', ->
       ), 2000
 
     it 'should send first message', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       message = {tag: 1, 'cmd': 'init', accessToken: 'ibj88w5aye'}
@@ -72,6 +76,7 @@ describe 'webSocket', ->
         done()
 
     it 'should check if state of connection is initialized after successful connection (onopen)', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       readyState = ws.socket.readyState
@@ -82,6 +87,7 @@ describe 'webSocket', ->
         done()
 
     it 'should trigger initialized event with user data, after calling success callback', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       ws.on 'initialized', (data) ->
@@ -105,6 +111,7 @@ describe 'webSocket', ->
   describe 'send', ->
 
     it 'should raise exception if channel is not connected', ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       expect ->
         ws.send(protocol.createMessage('/users'),{})
@@ -112,12 +119,12 @@ describe 'webSocket', ->
 
 
     it 'should send data with UTF-8 string format with included tag', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       message = protocol.createMessage('/users')
       
       ws.socket.onopen = ->
-        console.log 'on open'
         spy = spyOn(ws.socket, 'send')
         ws.send(message, {})
         message.data.tag = 1
@@ -132,6 +139,7 @@ describe 'webSocket', ->
   describe 'disconnect', ->
 
     it 'should close the websocket transport', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       
@@ -142,6 +150,7 @@ describe 'webSocket', ->
 
 
     it 'should set the initialized flag to false', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       
@@ -156,6 +165,7 @@ describe 'webSocket', ->
 
 
     it 'should set the socket instance to null', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       
@@ -167,6 +177,7 @@ describe 'webSocket', ->
   describe 'isConnected', ->
 
     it 'should return false if socket is not initialized', ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       
@@ -176,6 +187,7 @@ describe 'webSocket', ->
       ), 1000
 
     it 'should return true if socket is connected/open', (done) ->
+      console.log 'hi'
       ws = new WebSocketTransport(CONFIG.REALLY_DOMAIN, 'ibj88w5aye', options)
       ws.connect()
       

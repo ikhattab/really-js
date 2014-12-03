@@ -10,6 +10,7 @@ describe 'protocol', ->
   describe 'initializationMessage', ->
 
     it 'should return a proper object when getting initialization message', ->
+      console.log 'hi'
       message = protocol.initializationMessage('xxwmn93p0h')
       expect(message).toEqual
         type: 'initialization'
@@ -20,21 +21,25 @@ describe 'protocol', ->
   describe 'createMessage', ->
 
     it 'should throw error if called without passing body parameter as Object', ->
+      console.log 'hi'
       expect ->
         message = protocol.createMessage('users/123', '123')
       .toThrow new ReallyError('You should pass a body parameter as Object')
 
     it 'should throw error when called without resource parameter', ->
+      console.log 'hi'
       expect ->
         message = protocol.createMessage()
       .toThrow new ReallyError('You should pass a resource parameter as String')
 
     it 'should throw error when called with a non-string as a resource paramater', ->
+      console.log 'hi'
       expect ->
         message = protocol.createMessage(123)
       .toThrow new ReallyError('You should pass a resource parameter as String')
 
     it 'should return a proper object when creating a message', ->
+      console.log 'hi'
       message = protocol.createMessage('res')
       expect(message).toEqual
         type: 'create'
@@ -45,11 +50,13 @@ describe 'protocol', ->
   describe 'getMessage', ->
 
     it 'should throw error if called without passing the fields parameter as an array or nothing', ->
+      console.log 'hi'
       expect ->
         message = protocol.getMessage('/users/123', 'string')
       .toThrow new ReallyError('You should pass array or nothing for fields option')
 
     it 'should return proper format of message if correct parameters passed', ->
+      console.log 'hi'
       message = protocol.getMessage('/users/123', ['name', 'email'])
       expect(message).toEqual
         type: 'get'
@@ -62,6 +69,7 @@ describe 'protocol', ->
   describe 'updateMessage', ->
 
     it 'should throw error if called without passing an operation or it\'s length is zero', ->
+      console.log 'hi'
       expect ->
         message = protocol.updateMessage('/users/1234/', 4, [])
       .toThrow new ReallyError('You should pass at least one operation')
@@ -71,6 +79,7 @@ describe 'protocol', ->
       .toThrow new ReallyError('You should pass at least one operation')
 
     it 'should throw error if the passed operation is not supported', ->
+      console.log 'hi'
       ops = [
         op: 'foo'
         key: 'friends'
@@ -82,6 +91,7 @@ describe 'protocol', ->
       .toThrow new ReallyError("\"#{ops[0].op}\" operation you passed is not supported")
 
     it 'should return proper format of message if correct parameters passed', ->
+      console.log 'hi'
       ops = [
               op: 'set'
               key: 'friends'
@@ -111,16 +121,19 @@ describe 'protocol', ->
   describe 'deleteMessage', ->
 
     it 'should throw error if called without passing a resource parameter', ->
+      console.log 'hi'
       expect ->
         message = protocol.createMessage()
       .toThrow new ReallyError('You should pass a resource parameter as String')
 
     it 'should throw error if the passed resource parameter is not String', ->
+      console.log 'hi'
       expect ->
         message = protocol.createMessage(123)
       .toThrow new ReallyError('You should pass a resource parameter as String')
 
     it 'should return proper format of message if correct parameters passed', ->
+      console.log 'hi'
       message = protocol.deleteMessage('/users/1234/')
       expect(message.data).toEqual
         cmd: 'delete'
@@ -128,6 +141,7 @@ describe 'protocol', ->
 
   describe 'readMessage', ->
     it 'should return proper format of message if correct parameters passed', ->
+      console.log 'hi'
       options =
         fields: ['firstname', 'lastname', 'avatar']
         query:
@@ -158,6 +172,7 @@ describe 'protocol', ->
             subscribe: true
 
     it 'should throw error if not supported option has been passed', ->
+      console.log 'hi'
       options =
         notFields: ['firstname', 'lastname', 'avatar']
       expect ->
@@ -165,6 +180,7 @@ describe 'protocol', ->
       .toThrow new ReallyError('The option "notFields" isn\'t supported')
 
     it 'should throw error if wrong type of option has been passed', ->
+      console.log 'hi'
       options =
         fields: 'avatar'
       expect ->
@@ -174,6 +190,7 @@ describe 'protocol', ->
   describe 'heartbeatMessage', ->
 
     it 'should return proper format of message if heartbeatMessage is called', ->
+      console.log 'hi'
       message = protocol.heartbeatMessage()
       time = Date.now()
       expect(message).toEqual
@@ -185,6 +202,7 @@ describe 'protocol', ->
   describe 'isErrorMessage', ->
 
     it 'should return true if the message object has a property called error', ->
+      console.log 'hi'
       messageEmpty        = { }
       messageWithoutError = { sucess: true }
       messageWithError    = { error: true }
