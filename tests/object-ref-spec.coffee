@@ -18,10 +18,12 @@ describe 'ObjectRef', ->
       global.Really = undefined
 
     it 'should take a resource as parameter', ->
+      console.log 'hi'
       user = new ObjectRef('/users/123')
       expect(user.res).toEqual '/users/123'
 
     it 'should raise exception if constructor has no resource', ->
+      console.log 'hi'
       expect ->
         user = new ObjectRef()
       .toThrow new ReallyError('Can not be initialized without resource')
@@ -37,6 +39,7 @@ describe 'ObjectRef', ->
     
 
     it 'should call channel to send message', ->
+      console.log 'hi'
       user =  new ObjectRef('/users/123/')
 
       user.channel =
@@ -65,6 +68,7 @@ describe 'ObjectRef', ->
       global.Really = undefined
     
     it 'should reject the promise when there are no passed options', (done) ->
+      console.log 'hi'
       user = new ObjectRef('/users/123/')
       result = user.update()
       expect(typeof result.then is 'function').toBeTruthy()
@@ -74,6 +78,7 @@ describe 'ObjectRef', ->
         done()
 
     it 'should call channel to send message', ->
+      console.log 'hi'
       user =  new ObjectRef('/users/123/')
       user.channel =
         send: -> 'foo'
@@ -117,6 +122,7 @@ describe 'ObjectRef', ->
       global.Really = undefined
 
     it 'should call channel to send message', ->
+      console.log 'hi'
       user = new ObjectRef('/users/123/')
       user.channel =
         send: -> 'foo'
